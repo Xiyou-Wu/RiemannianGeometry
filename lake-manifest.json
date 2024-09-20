@@ -71,7 +71,7 @@
    "inputRev": "main",
    "inherited": true,
    "configFile": "lakefile.toml"},
-  {"url": "https://kkgithub.com/leanprover-community/mathlib4.git",
+  {"url": "https://gitclone.com/github.com/leanprover-community/mathlib4.git",
    "type": "git",
    "subDir": null,
    "scope": "",
