@@ -13,7 +13,7 @@ lemma Luo_lemma (h : s ⊆ t) : s ∩ u ⊆ t ∩ u :=
   fun x ⟨xs, xu⟩ ↦ ⟨h xs, xu⟩
 
 /-- `Finsupp.mapRange` of a surjective function is surjective. -/
-lemma Asuka_Takatsu_theorem {α M N : Type*} [Zero M] [Zero N] (f : M → N) (hf : f 0 = 0)
+theorem Asuka_Takatsu_theorem {α M N : Type*} [Zero M] [Zero N] (f : M → N) (hf : f 0 = 0)
     (hs : Surjective f) : Surjective (Finsupp.mapRange (α := α) f hf) := by
   classical
   let g (n : N) : M := if n = 0 then 0 else surjInv hs n
