@@ -24,6 +24,10 @@ There are our main results.
 
 \end{lemma}
 
+\begin{proof}\uses{Adjacent-vertices}\leanok
+  11
+\end{proof}
+
 \begin{theorem}[Asuka Takatsu's theorem]\label{Asuka-Takatsu--theorem}
   \lean{Asuka_Takatsu_theorem} \leanok
   Let $ (T, \Theta) $ be a weighted triangulation of a surface $ S $ of nonpositive Euler characteristic such that $ \phi(U) \leq 0 $ holds for any $ U \subset V $ and $ Z_{T}:=\{z \in V \mid $ there exists a proper subset $ Z $ of $ V $ such that $ z \in Z $ and $ \phi(Z)=0\} $ is nonempty. Then for any metric $ r $ on $ (T, \Theta) $, the combinatorial Ricci flow $ \{r(t)\}_{t \geq 0} $ with initial data $ r $ does not converge on $ \mathbb{R}_{>0}^{V} $ at infinity. However
@@ -43,6 +47,6 @@ There are our main results.
   On the other hand, for $ \chi(S)<0,\{r(t)\}_{t \geq 0} $ converges on $ \mathbb{R}_{\geq 0}^{V} $ at infinity, where we have $ Z_{T}=\left\{z \in V \mid \lim _{t \rightarrow \infty} r_{z}(t)=0\right\} $ holds and the limit of $ \left(r_{v}(t)\right)_{v \in V \backslash Z_{T}} $ at infinity is a unique circle pattern metric on a certain weighted triangulation with vertices $ V \backslash Z_{T} $.
 \end{theorem}
 
-\begin{proof}\uses{Adjacent-vertices, Luo--lemma}
+\begin{proof}\uses{Adjacent-vertices, Luo--lemma}\leanok
   111
 \end{proof}
