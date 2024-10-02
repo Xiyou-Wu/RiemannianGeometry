@@ -6,10 +6,10 @@ open Function
 variable {α : Type*}
 variable (s t u : Set α)
 
-def evens : Set ℕ :=
+def Adjacent_vertices : Set ℕ :=
   { n | Even n }
 
-lemma luo_lemma (h : s ⊆ t) : s ∩ u ⊆ t ∩ u :=
+lemma Luo_lemma (h : s ⊆ t) : s ∩ u ⊆ t ∩ u :=
   fun x ⟨xs, xu⟩ ↦ ⟨h xs, xu⟩
 
 /-- `Finsupp.mapRange` of a surjective function is surjective. -/
