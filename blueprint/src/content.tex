@@ -10,43 +10,78 @@
 
 There are our main results.
 
-\begin{definition}[Adjacent vertices]\label{Adjacent-vertices}
-  \lean{Adjacent_vertices} \leanok
-  A pair of vertices is said to be adjacent if they are joined by an edge.
+\begin{definition}[Weighted triangulation]
+  \label{Weighted-triangulation}
+  A weighted triangulation $(T, \Theta)$ is a triangulation equipped with a weight $\Theta : E → [0, \pi/2]$.
 \end{definition}
 
-\begin{lemma}[Luo's theorem]\label{Luo--lemma}
-  \lean{Luo_lemma} \leanok
-  Let $ h: \mathbb{R}^{n} \rightarrow \mathbb{R} $ be a smooth convex function and let $ \xi:[0, \infty) \rightarrow \mathbb{R}^{n} $ be a gradient flow of $ h $. It holds for any $ \tau>0 $ and $ \xi^{*} \in \mathbb{R}^{n} $ that
+\begin{definition}[Circle packing Metric, piecewise linear length, Cone angle]
+  \label{Metric-Length-ConeAngle}\uses{Weighted-triangulation}
+  We call $r=\left (r_{v}\right)_{v \in V} \in \mathbb{R}_{>0}^{V}$ a metric on ( $\left. T, \Theta\right)$ and define the length $\ell (e ; r)$ of an edge $e$ with endpoints $v, u$ with respect to $r$ by
   $$
-  |\nabla h(\xi(\tau))|^{2} \leq\left|\nabla h\left(\xi^{*}\right)\right|^{2}+\frac{1}{\tau^{2}}\left|\xi^{*}-\xi(0)\right|^{2}
+  \ell(e ; r):=\binom{\text { the distance between the centers of two circles on the universal }}{\text { cover of } S \text { with radii } r_{v}, r_{u} \text { intersecting at angle } \Theta(e)},
   $$
+  Which determines the angle at each vertex in triangles of $(T, \Theta)$. The cone angle $a_{v}(r)$ at the vertex $v$ with respect to $r$ is the sum of each angle at $v$ in all triangles of $(T, \Theta)$ having $v$ as one of the vertices.
+\end{definition}
 
-\end{lemma}
+\begin{definition}[combinatorial curvature]
+  \label{combinatorial-curvature}\uses{Metric-Length-ConeAngle}
+  We call $K_v (r) := 2π − a_v (r)$ the curvature at the vertex $v$ with respect to $r$
+\end{definition}
 
-\begin{proof}\uses{Adjacent-vertices}\leanok
-  11
-\end{proof}
+\begin{definition}[circle pattern metric]
+  \label{circle-pattern-metric}\uses{combinatorial-curvature}
+  A metric is called a circle pattern metric provided its curvature is identically zero at each vertex.
+\end{definition}
 
-\begin{theorem}[Asuka Takatsu's theorem]\label{Asuka-Takatsu--theorem}
-  %\lean{Asuka_Takatsu_theorem} \leanok
-  Let $ (T, \Theta) $ be a weighted triangulation of a surface $ S $ of nonpositive Euler characteristic such that $ \phi(U) \leq 0 $ holds for any $ U \subset V $ and $ Z_{T}:=\{z \in V \mid $ there exists a proper subset $ Z $ of $ V $ such that $ z \in Z $ and $ \phi(Z)=0\} $ is nonempty. Then for any metric $ r $ on $ (T, \Theta) $, the combinatorial Ricci flow $ \{r(t)\}_{t \geq 0} $ with initial data $ r $ does not converge on $ \mathbb{R}_{>0}^{V} $ at infinity. However
+\begin{definition}[combinatorial Ricci flow]
+  \label{combinatorial-ricci-flow}\uses{Metric-Length-ConeAngle, combinatorial-curvature}
+  the combinatorial Ricci flow, which is a family of metrics $\{r (t)\}_{t \in[0, T)}$ that satisfies
+  $$
+  \frac{d}{d t} r_{v}(t)=-K_{v}(r(t)) \sigma_{S}\left(r_{v}(t)\right), \quad \sigma_{S}\left(r_{v}\right):=\left\{\begin{array}{ll}
+  r_{v} & \text { if } \chi(S)=0 \\
+  \sinh r_{v} & \text { if } \chi(S)<0
+  \end{array}\right.
+  $$
+\end{definition}
+
+\begin{theorem}[Thurston-Chow-Luo theorem]
+  \label{thurston-chow-luo}
+  Let $(T, \Theta)$ be a weighted triangulation of a surface $S$ of nonpositive Euler characteristic. The following conditions (I), (II), and (III) are equivalent to each other.
+
+  (I) There exists a unique circle pattern metric up to a scalar multiple if $\chi (S)=0$
+
+  (II) It holds for any nonempty proper subset $U$ of $V$ that
+  $$
+  \phi(U):=-\sum_{f \in \operatorname{Lk}(U)}\left(\pi-\Theta\left(e_{v(f)}^{f}\right)\right)+2 \pi \chi\left(\tau_{U}\right)<0
+  $$
+  Where $\tau_{U}$ is the $C W$ -subcomplex of $T$, consisting of all cells whose vertices are contained in $U$, and $f \in \operatorname{Lk}(U)$ is an element in $F$ such that one vertex $v (f)$ in $f$ belongs to $U$ and neither of the endpoints of the edge $e_{v (f)}^{f}$ in $f$ opposite $v (f)$ belongs to $U$.
+
+  (III) Given any metric $r$ on $(T, \Theta)$, the combinatorial Ricci flow with initial data $r$ exists for all time and converges on $\mathbb{R}_{>0}^{V}$ at infinity.
+\end{theorem}
+
+\begin{definition}[phi def]
+  \label{phi-def} \uses{thurston-chow-luo}
+  For any nonempty proper subset $U$ of $V$ that
+  $$
+  \phi(U):=-\sum_{f \in \operatorname{Lk}(U)}\left(\pi-\Theta\left(e_{v(f)}^{f}\right)\right)+2 \pi \chi\left(\tau_{U}\right)<0
+  $$
+  Where $\tau_{U}$ is the $C W$ -subcomplex of $T$, consisting of all cells whose vertices are contained in $U$, and $f \in \operatorname{Lk}(U)$ is an element in $F$ such that one vertex $v (f)$ in $f$ belongs to $U$ and neither of the endpoints of the edge $e_{v (f)}^{f}$ in $f$ opposite $v (f)$ belongs to $U$.
+\end{definition}
+
+\begin{theorem}[Main Theorem]
+  \label{main-theorem} \uses{combinatorial-ricci-flow, phi-def}
+  Let $(T, \Theta)$ be a weighted triangulation of a surface $S$ of nonpositive Euler characteristic such that $\phi (U) \leq 0$ holds for any $U \subset V$ and $Z_{T}:=\{z \in V \mid$ there exists a proper subset $Z$ of $V$ such that $z \in Z$ and $\phi (Z)=0\}$ is nonempty. Then for any metric $r$ on $(T, \Theta)$, the combinatorial Ricci flow $\{r (t)\}_{t \geq 0}$ with initial data $r$ does not converge on $\mathbb{R}_{>0}^{V}$ at infinity. However
   $$
   \lim _{t \rightarrow \infty} K_{v}(r(t))=0
   $$
-  holds for any vertex $ v $.
+  Holds for any vertex $v$.
 
-  On the one hand, for $ \chi(S)=0,\{r(t)\}_{t \geq 0} $ does not converge on $ \mathbb{R}_{\geq 0}^{V} $ at infinity. However if we fix an arbitrary $ v \in V \backslash Z_{T} $, then the limit
+  On the one hand, for $\chi (S)=0,\{r (t)\}_{t \geq 0}$ does not converge on $\mathbb{R}_{\geq 0}^{V}$ at infinity. However if we fix an arbitrary $v \in V \backslash Z_{T}$, then the limit
   $$
   \rho_{u}:=\lim _{t \rightarrow \infty} \frac{r_{u}(t)}{r_{v}(t)}
   $$
-  exists for any $ u \in V $, where $ Z_{T}=\left\{z \in V \mid \rho_{z}=0\right\} $ holds and $ \left(\rho_{u}\right)_{u \in V \backslash Z_{T}} $ is a unique circle pattern metric with normalization $ \rho_{v}=1 $ on a certain weighted triangulation with vertices $ V \backslash Z_{T} $.
+  Exists for any $u \in V$, where $Z_{T}=\left\{z \in V \mid \rho_{z}=0\right\}$ holds and $\left (\rho_{u}\right)_{u \in V \backslash Z_{T}}$ is a unique circle pattern metric with normalization $\rho_{v}=1$ on a certain weighted triangulation with vertices $V \backslash Z_{T}$.
 
-  On the other hand, for $ \chi(S)<0,\{r(t)\}_{t \geq 0} $ converges on $ \mathbb{R}_{\geq 0}^{V} $ at infinity, where we have $ Z_{T}=\left\{z \in V \mid \lim _{t \rightarrow \infty} r_{z}(t)=0\right\} $ holds and the limit of $ \left(r_{v}(t)\right)_{v \in V \backslash Z_{T}} $ at infinity is a unique circle pattern metric on a certain weighted triangulation with vertices $ V \backslash Z_{T} $.
-
-  On the other hand, for $ \chi(S)<0,\{r(t)\}_{t \geq 0} $ converges on $ \mathbb{R}_{\geq 0}^{V} $ at infinity, where we have $ Z_{T}=\left\{z \in V \mid \lim _{t \rightarrow \infty} r_{z}(t)=0\right\} $ holds and the limit of $ \left(r_{v}(t)\right)_{v \in V \backslash Z_{T}} $ at infinity is a unique circle pattern metric on a certain weighted triangulation with vertices $ V \backslash Z_{T} $.
+  On the other hand, for $\chi (S)<0,\{r (t)\}_{t \geq 0}$ converges on $\mathbb{R}_{\geq 0}^{V}$ at infinity, where we have $Z_{T}=\left\{z \in V \mid \lim _{t \rightarrow \infty} r_{z}(t)=0\right\}$ holds and the limit of $\left (r_{v}(t)\right)_{v \in V \backslash Z_{T}}$ at infinity is a unique circle pattern metric on a certain weighted triangulation with vertices $V \backslash Z_{T}$.
 \end{theorem}
-
-\begin{proof}\uses{Adjacent-vertices, Luo--lemma}
-  111
-\end{proof}
